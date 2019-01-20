@@ -20,13 +20,16 @@ def startIris():
     iris = datasets.load_iris()
     
     print("\nWhat percentage would you like to use for your test data?")
-    option = input("For example enter 10 for 10%, 30 for 30% and so on. Percentage: ")
+    test_option = input("For example enter 10 for 10%, 30 for 30% and so on. Percentage: ")
 
     # Shuffle datasets, and split into train and test.
-    X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=int(option)/100)
+    X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=int(test_option)/100)
+    
+    print("\nHow many neighbors would you like to use?")
+    neighbors_option = input("Neighbors: ")
     
     #Load own classifier model 
-    classifierVitali = VNeighborsClassifier(n_neighbors=3)
+    classifierVitali = VNeighborsClassifier(n_neighbors=int(neighbors_option))
     
     # Train the classifier using your own model 
     classifierVitali.fit(X_train, y_train)
