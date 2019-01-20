@@ -48,7 +48,7 @@ def startIris():
     print("Score: " + str(classifierVitali.score(X_test, y_test)*100) + "%")
     
     
-    classifier = KNeighborsClassifier(n_neighbors=3)
+    classifier = KNeighborsClassifier(n_neighbors=int(neighbors_option))
     classifier.fit(X_train, y_train)
     predictions = classifier.predict(X_test)
     
