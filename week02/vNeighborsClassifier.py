@@ -7,7 +7,7 @@ Created on Sat Jan 12 16:10:28 2019
 
 import numpy as np
 
-class VNeighborsClassifier:
+class VNeighborsClassifier: 
     
     def __init__(self, n_neighbors=1):
         self.n_neighbors = n_neighbors

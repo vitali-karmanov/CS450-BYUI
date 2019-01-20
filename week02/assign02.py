@@ -14,12 +14,16 @@ from vNeighborsClassifier import VNeighborsClassifier
 
 
 def startIris():
+    
 
-    # Load Iris datasets from sklearn
+    # Load Iris datasets from sklearn  
     iris = datasets.load_iris()
     
-    # Shuffle datasets, and split into train and test (6 items to test).
-    X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.10)
+    print("\nWhat percentage would you like to use for your test data?")
+    option = input("For example enter 10 for 10%, 30 for 30% and so on. Percentage: ")
+
+    # Shuffle datasets, and split into train and test.
+    X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=int(option)/100)
     
     #Load own classifier model 
     classifierVitali = VNeighborsClassifier(n_neighbors=3)
@@ -47,6 +51,10 @@ def startIris():
     
     print("Prediction KNeighborsClassifier: ")
     print(predictions)
+    
+    again = input("\nWould you like to start again? (y/n): ")
+    if again == "y":
+        startIris()
 
 
 
