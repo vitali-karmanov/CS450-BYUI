@@ -7,7 +7,6 @@ Created on Fri Jan 11 10:09:06 2019
 
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 
 
@@ -29,30 +28,26 @@ def startIris():
     classifierVitali.fit(X_train, y_train)
     
     predictionV = classifierVitali.predict(X_test)
+
     
-    # Test the classifier with the test dataset.
-    score = classifierVitali.score(X_test, y_test)
-   
-    print("Score: ")
-    print(score)
-    
-    print("Actual: ")
+    print("Actual Target Test: ")
     print(y_test)
+
+    
+    print("Prediction VitaliNeighborsClassifier: ")
+    print(predictionV)
+    
+    # Test the classifier with the test dataset. (New prediction is called when the Score function is called)
+    print("Score: " + str(classifierVitali.score(X_test, y_test)*100) + "%")
     
     
     classifier = KNeighborsClassifier(n_neighbors=3)
     classifier.fit(X_train, y_train)
     predictions = classifier.predict(X_test)
     
-    print("Prediction Vitali: ")
-    print(predictionV)
-    
-    print("Oficial: ")
+    print("Prediction KNeighborsClassifier: ")
     print(predictions)
-    
-    
-    # Print the % of accuracy 
-    #print("Accuracy: " + str(classifierVitali.score(X_test, y_test)*100) + "%")
+
 
 
 print("Welcome to Iris Data Set example")

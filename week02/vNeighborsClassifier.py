@@ -17,7 +17,6 @@ class VNeighborsClassifier:
     def fit(self, X_train, y_train):
         self.X_train = X_train
         self.y_train = y_train
-        print("Classifier trained using the VNeighborsClassifier model ")
         
         
     def predict(self, X_test):
@@ -28,37 +27,33 @@ class VNeighborsClassifier:
     
             distance_X_test_row = self.calcDistance(X_test_row)
             
-            sorted_res = sorted(distance_X_test_row, key=lambda tup: tup[0])[:self.n_neighbors]
+            sorted_distance = sorted(distance_X_test_row, key=lambda tup: tup[0])[:self.n_neighbors]
             
+            list_target = [i[1] for i in sorted_distance]
             
-            list1 = [i[1] for i in sorted_res]
-            
-            setosa = list1.count(0)
-            versicolor = list1.count(1)
-            virginica = list1.count(2)
-            
+            setosa = list_target.count(0)
+            versicolor = list_target.count(1)
+            virginica = list_target.count(2)
             
             prediction = -1
             
             if setosa > versicolor and setosa > virginica:
                 prediction = 0
+                
             if versicolor > setosa and versicolor > virginica:
                 prediction = 1
+                
             if virginica > versicolor and virginica > setosa:
                 prediction = 2
                 
             if prediction == -1:
-                dist, target = sorted_res[0]
+                dist, target = sorted_distance[0]
                 prediction = target
             
             predictions.append(prediction)
-            
-        print(predictions)
+        
     
         return predictions
-       # print(sorted_res)
-        
-        #print(np.searchsorted(A,[0,1,2]))
         
         
         
