@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Jan 11 10:09:06 2019
-
 @author: Vitali Karmanov
 """
 
@@ -42,8 +40,11 @@ def startCarEvaluation():
     
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
+    print("\nHow many neighbors would you like to use?")
+    neighbors_option = input("Neighbors: ")
+    
     # Create the classifier
-    classifier = KNeighborsClassifier(n_neighbors=5)
+    classifier = KNeighborsClassifier(n_neighbors=int(neighbors_option))
 
     # Train the classifier
     classifier.fit(X_train, y_train)
@@ -54,7 +55,7 @@ def startCarEvaluation():
 
     # Compute and print the accuracy
     accuracy = accuracy_score(y_test, y_pred)
-    print("Car Evaluation - Accuracy: {}".format(accuracy))
+    print("Car Evaluation - Accuracy: {}".format(str(accuracy*100) + "%"))
     
     
     
@@ -73,8 +74,11 @@ def startAutomobileMPG():
     y = data["mpg"].values.flatten()
     
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+    
+    print("\nHow many neighbors would you like to use?")
+    neighbors_option = input("Neighbors: ")
 
-    regr = KNeighborsRegressor(n_neighbors=3)
+    regr = KNeighborsRegressor(n_neighbors=int(neighbors_option))
     regr.fit(X_train, y_train)
     
     predictions = regr.predict(X_test)
@@ -82,7 +86,7 @@ def startAutomobileMPG():
     # Compute and print the accuracy
     accuracy = r2_score(y_test, predictions)
     
-    print("Automobile MPG - Accuracy: {}".format(accuracy))
+    print("Automobile MPG - Accuracy: {}".format(str(accuracy*100) + "%"))
     
 
 
@@ -128,7 +132,10 @@ def startStudentPerformance():
     
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-    regr = KNeighborsRegressor(n_neighbors=3)
+    print("\nHow many neighbors would you like to use?")
+    neighbors_option = input("Neighbors: ")
+
+    regr = KNeighborsRegressor(n_neighbors=int(neighbors_option))
     regr.fit(X_train, y_train)
     
     predictions = regr.predict(X_test)
@@ -136,18 +143,24 @@ def startStudentPerformance():
     # Compute and print the accuracy
     accuracy = r2_score(y_test, predictions)
     
-    print("Student Performance - Accuracy: {}".format(accuracy))
-    
+    print("Student Performance - Accuracy: {}".format(str(accuracy*100) + "%"))
+   
 
+def startDataset():
+    print("What data set would you like to use?")
+    option = input("Enter 1 for Car Evaluation, or 2 for Automobile MPG, or 3 for StudentPerformance: ")
     
-    #print(data)
-    
-    
-    
-    
+    if option == str(1):
+        startCarEvaluation()
+    if option == str(2):
+        startAutomobileMPG()
+    if option == str(3):
+        startStudentPerformance()
 
+    again = input("\nWould you like to start again? (y/n): ")
+    if again == "y":
+        startDataset()
+        
 pd.options.display.max_columns = 20
 print("Welcome to Census Data Set example")
-startCarEvaluation()
-startAutomobileMPG()
-startStudentPerformance()
+startDataset()
